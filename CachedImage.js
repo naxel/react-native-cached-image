@@ -53,8 +53,10 @@ class CachedImage extends React.Component {
     };
 
     static defaultProps = {
-            renderImage: props => (<ImageBackground imageStyle={props.style} ref={CACHED_IMAGE_REF} {...props} />),
-            activityIndicatorProps: {},
+        renderImage: props => (<ImageBackground imageStyle={props.style} ref={(ref) => {
+            this.cachedImageRef = ref;
+        }} {...props} />),
+        activityIndicatorProps: {},
     };
 
     static contextTypes = {
@@ -108,7 +110,7 @@ class CachedImage extends React.Component {
 
     setNativeProps(nativeProps) {
         try {
-            this.refs[CACHED_IMAGE_REF].setNativeProps(nativeProps);
+            this.cachedImageRef.setNativeProps(nativeProps);
         } catch (e) {
             console.error(e);
         }
